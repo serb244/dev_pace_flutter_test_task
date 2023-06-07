@@ -1,6 +1,7 @@
-import 'package:dev_pace_flutter_test_task/core/constants/app_sizes.dart';
 import 'package:dev_pace_flutter_test_task/features/item_list/data/models/item.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/constants/constants.dart';
 
 class ItemWidget extends StatelessWidget {
   final Item item;
@@ -10,9 +11,12 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(10),
-        height: AppSizes.itemHeight,
-        color: Colors.amber,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: AppColor.dark,
+            width: AppSizes.borderItemWidth,
+          ),
+        ),
         child: Center(
           child: Text(item.name),
         ));

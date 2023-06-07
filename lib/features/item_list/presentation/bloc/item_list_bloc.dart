@@ -57,7 +57,7 @@ class ItemListBloc extends Bloc<ItemListEvent, ItemListState> {
     await wait();
     try {
       items.add(Item('${AppStrings.itemName} ${items.length + 1}'));
-      emit(ItemListLoadedState(items: items.reversed.toList()));
+      emit(ItemListLoadedState(items: items));
     } catch (e) {
       log(e.toString());
       AppError error = AppError(name: e.toString());
@@ -73,7 +73,7 @@ class ItemListBloc extends Bloc<ItemListEvent, ItemListState> {
     await wait();
     try {
       items.removeLast();
-      emit(ItemListLoadedState(items: items.reversed.toList()));
+      emit(ItemListLoadedState(items: items));
     } catch (e) {
       log(e.toString());
       AppError error = AppError(name: e.toString());
