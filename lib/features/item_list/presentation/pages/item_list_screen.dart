@@ -1,5 +1,5 @@
-import 'package:dev_pace_flutter_test_task/core/constants/assets.dart';
-import 'package:dev_pace_flutter_test_task/core/constants/sizes.dart';
+import 'package:dev_pace_flutter_test_task/core/constants/app_assets.dart';
+import 'package:dev_pace_flutter_test_task/core/constants/app_sizes.dart';
 import 'package:dev_pace_flutter_test_task/features/item_list/presentation/bloc/item_list_bloc.dart';
 import 'package:dev_pace_flutter_test_task/features/item_list/presentation/widgets/item_widget.dart';
 import 'package:flutter/gestures.dart';
@@ -18,50 +18,61 @@ class ItemListScreen extends StatelessWidget {
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: const MainFloatingActionButton(),
-        body: BlocBuilder<ItemListBloc, ItemListState>(
-          builder: (context, state) {
-            if (state is ItemListLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            if (state is ItemListErrorState) {
-              return Center(
-                child: Text(state.error.name),
-              );
-            }
-            if (state is ItemListLoadedState) {
-              return Column(
-                // shrinkWrap: true,
-                children: [
-                  Expanded(
-                    // alignment: Alignment.center,
-                    child: Image.asset(AppImages.logo),
-                  ),
-                  GridView.builder(
-                      padding: const EdgeInsets.all(AppSizes.itemPadding),
-                      // clipBehavior: Clip.hardEdge,
-                      dragStartBehavior: DragStartBehavior.start,
-                      physics: const NeverScrollableScrollPhysics(),
-                      // key: _textWidgetKey,
-                      shrinkWrap: true,
+        body: SafeArea(
+          child: BlocBuilder<ItemListBloc, ItemListState>(
+            builder: (context, state) {
+              if (state is ItemListLoadingState) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (state is ItemListErrorState) {
+                return Center(
+                  child: Text(state.error.name),
+                );
+              }
+              if (state is ItemListLoadedState) {
+                return CustomScrollView(
+                  reverse: true,
+                  slivers: [
+                    // SliverAppBar(
+                    //   expandedHeight: 600.0,
+                    //   flexibleSpace: FlexibleSpaceBar(
+                    //     background: Image.asset(
+                    //       'assets/images/logo.png',
+                    //       fit: BoxFit.contain,
+                    //     ),
+                    //   ),
+                    // ),
+                    SliverGrid(
                       gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        // mainAxisExtent: 0,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        crossAxisCount: 2,
-                        // childAspectRatio: 2,
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200.0,
+                        mainAxisSpacing: 10.0,
+                        crossAxisSpacing: 10.0,
+                        childAspectRatio: 2.0,
                       ),
-                      itemCount: state.items.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ItemWidget(item: state.items[index]);
-                      })
-                ],
-              );
-            }
-            return const SizedBox.shrink();
-          },
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          return ItemWidget(item: state.items[index]);
+                        },
+                        childCount: state.items.length,
+                      ),
+                    ),
+                    SliverFillRemaining(
+                      hasScrollBody: false,
+                      fillOverscroll: true,
+                      child: Center(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        child: Image.asset(AppImages.logo),
+                      ),
+                    ),
+                  ],
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
         ),
       ),
     );

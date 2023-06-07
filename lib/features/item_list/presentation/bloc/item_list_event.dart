@@ -15,3 +15,7 @@ class ItemListAddItemEvent extends ItemListEvent {
 class ItemListRemoveItemEvent extends ItemListEvent {
   const ItemListRemoveItemEvent();
 }
+
+class ItemListClearItemsEvent extends ItemListEvent {
+  const ItemListClearItemsEvent();
+}

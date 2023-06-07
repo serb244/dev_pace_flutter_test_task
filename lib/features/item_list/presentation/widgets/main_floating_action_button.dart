@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/constants/sizes.dart';
+import '../../../../core/constants/app_sizes.dart';
 import '../bloc/item_list_bloc.dart';
 
 class MainFloatingActionButton extends StatelessWidget {
@@ -14,6 +14,10 @@ class MainFloatingActionButton extends StatelessWidget {
 
   void _removeItem(BuildContext context) {
     context.read<ItemListBloc>().add(const ItemListRemoveItemEvent());
+  }
+
+  void _clearItems(BuildContext context) {
+    context.read<ItemListBloc>().add(const ItemListClearItemsEvent());
   }
 
   @override
@@ -29,6 +33,13 @@ class MainFloatingActionButton extends StatelessWidget {
       FloatingActionButton(
         child: const Icon(Icons.remove),
         onPressed: () => _removeItem(context),
+      ),
+      const SizedBox(
+        height: AppSizes.verticalPadding,
+      ),
+      FloatingActionButton(
+        child: const Icon(Icons.clear),
+        onPressed: () => _clearItems(context),
       ),
     ]);
   }
