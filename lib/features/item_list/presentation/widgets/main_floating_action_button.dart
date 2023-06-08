@@ -34,13 +34,13 @@ class MainFloatingActionButton extends StatelessWidget {
         child: const Icon(Icons.remove),
         onPressed: () => _removeItem(context),
       ),
-      const SizedBox(
-        height: AppSizes.verticalPadding,
-      ),
-      FloatingActionButton(
-        child: const Icon(Icons.clear),
-        onPressed: () => _clearItems(context),
-      ),
+      // const SizedBox(
+      //   height: AppSizes.verticalPadding,
+      // ),
+      // FloatingActionButton(
+      //   child: const Icon(Icons.clear),
+      //   onPressed: () => _clearItems(context),
+      // ),
     ]);
   }
 }

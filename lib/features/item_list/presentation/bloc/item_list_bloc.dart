@@ -1,4 +1,5 @@
-import 'dart:developer';
+import 'dart:developer' as dev;
+import 'dart:math';
 import 'package:dev_pace_flutter_test_task/core/constants/app_strings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,7 +35,7 @@ class ItemListBloc extends Bloc<ItemListEvent, ItemListState> {
       items.clear();
       emit(ItemListLoadedState(items: items));
     } catch (e) {
-      log(e.toString());
+      dev.log(e.toString());
       AppError error = AppError(name: e.toString());
       emit(ItemListErrorState(error));
     }
@@ -46,7 +47,7 @@ class ItemListBloc extends Bloc<ItemListEvent, ItemListState> {
     try {
       emit(ItemListLoadedState(items: items));
     } catch (e) {
-      log(e.toString());
+      dev.log(e.toString());
       AppError error = AppError(name: e.toString());
       emit(ItemListErrorState(error));
     }
@@ -56,10 +57,13 @@ class ItemListBloc extends Bloc<ItemListEvent, ItemListState> {
     emit(ItemListLoadingState());
     await wait();
     try {
+      if (Random().nextInt(10) > 8) {
+        throw Exception('An error occurred');
+      }
       items.add(Item('${AppStrings.itemName} ${items.length + 1}'));
       emit(ItemListLoadedState(items: items));
     } catch (e) {
-      log(e.toString());
+      dev.log(e.toString());
       AppError error = AppError(name: e.toString());
       emit(ItemListErrorState(error));
     }
@@ -72,10 +76,13 @@ class ItemListBloc extends Bloc<ItemListEvent, ItemListState> {
     emit(ItemListLoadingState());
     await wait();
     try {
+      if (Random().nextInt(10) > 8) {
+        throw Exception('An error occurred');
+      }
       items.removeLast();
       emit(ItemListLoadedState(items: items));
     } catch (e) {
-      log(e.toString());
+      dev.log(e.toString());
       AppError error = AppError(name: e.toString());
       emit(ItemListErrorState(error));
     }

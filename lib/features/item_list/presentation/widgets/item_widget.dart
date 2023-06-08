@@ -13,12 +13,15 @@ class ItemWidget extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColor.dark,
+            color: AppColors.dark,
             width: AppSizes.borderItemWidth,
           ),
         ),
         child: Center(
-          child: Text(item.name),
+          child: Text(
+            item.name,
+            style: TextStyles.body,
+          ),
         ));
   }
 }
