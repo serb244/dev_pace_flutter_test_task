@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants/constants.dart';
+import '../../data/data_sources/items_list_local_data_source.dart';
 import '../bloc/item_list_bloc.dart';
 import '../widgets/widgets.dart';
 
@@ -34,7 +35,9 @@ class ItemListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ItemListBloc()..add(const ItemListStartEvent()),
+      create: (context) =>
+          ItemListBloc(context.read<ItemsListLocalDataSource>())
+            ..add(const ItemListStartEvent()),
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: const MainFloatingActionButton(),

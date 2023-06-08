@@ -16,10 +16,6 @@ class MainFloatingActionButton extends StatelessWidget {
     context.read<ItemListBloc>().add(const ItemListRemoveItemEvent());
   }
 
-  void _clearItems(BuildContext context) {
-    context.read<ItemListBloc>().add(const ItemListClearItemsEvent());
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.end, children: [
@@ -34,13 +30,6 @@ class MainFloatingActionButton extends StatelessWidget {
         child: const Icon(Icons.remove),
         onPressed: () => _removeItem(context),
       ),
-      // const SizedBox(
-      //   height: AppSizes.verticalPadding,
-      // ),
-      // FloatingActionButton(
-      //   child: const Icon(Icons.clear),
-      //   onPressed: () => _clearItems(context),
-      // ),
     ]);
   }
 }

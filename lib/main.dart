@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/my_bloc_observer.dart';
+import 'features/item_list/data/data_sources/items_list_local_data_source.dart';
 import 'features/item_list/presentation/pages/item_list_screen.dart';
 
 void main() {
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ItemListScreen(),
+      home: RepositoryProvider(
+        create: (context) => ItemsListLocalDataSource(),
+        child: const ItemListScreen(),
+      ),
     );
   }
 }
