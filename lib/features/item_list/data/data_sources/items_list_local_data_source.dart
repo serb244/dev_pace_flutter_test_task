@@ -22,9 +22,8 @@ class ItemsListLocalDataSource {
     if (Random().nextInt(10) > 8) {
       throw Exception('An error occurred');
     }
-    {
-      _itemList.add(Item('${AppStrings.itemName} ${_itemList.length + 1}'));
-    }
+
+    _itemList.add(Item('${AppStrings.itemName} ${_itemList.length + 1}'));
   }
 
   Future<void> removeItem() async {

@@ -1,10 +1,11 @@
-import 'package:dev_pace_flutter_test_task/features/item_list/presentation/widgets/layout_builder_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/data_sources/items_list_local_data_source.dart';
 import '../bloc/item_list_bloc.dart';
 import '../widgets/custom_scroll_view_list.dart';
+import '../widgets/layout_builder_list.dart';
+import '../widgets/list_view_item_list.dart';
 import '../widgets/widgets.dart';
 
 class ItemListScreen extends StatelessWidget {
@@ -30,7 +31,8 @@ class ItemListScreen extends StatelessWidget {
                 child: Text(state.error.name),
               );
             } else if (state is ItemListLoadedState) {
-              return LayoutBuilderList(state: state);
+              return ListViewItemList(state: state);
+              // return LayoutBuilderList(state: state);
               // return CustomScrollViewList(state: state);
             } else {
               return const SizedBox.shrink();
